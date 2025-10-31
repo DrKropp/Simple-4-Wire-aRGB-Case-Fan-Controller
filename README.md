@@ -10,6 +10,35 @@ A PlatformIO project for controlling a 120mm 4-wire PWM fan with integrated addr
 - **Potentiometer**: Variable resistor for speed control
 - **Optional**: Logic-level N-channel MOSFET for complete fan shutoff (recommended)
 
+### Fan Connector Pinouts
+
+#### 4-Wire PWM Fan Connector
+Standard 4-pin fan connector pinout:
+
+| Pin No. | Wire Color | Signal | Description |
+|---------|------------|--------|-------------|
+| 1 | Black | Ground | Common ground |
+| 2 | Red | +12V | Fan motor power (constant) |
+| 3 | Yellow | Tachometer | RPM feedback signal (2 pulses/rev) |
+| 4 | Blue | PWM | PWM speed control input (25kHz) |
+
+**Note**: The PWM signal controls the fan's internal motor driver but does NOT switch power. The fan always has 12V connected, which is why some fans won't completely stop with PWM alone.
+
+#### 3-Pin Addressable RGB Connector (5V)
+The aRGB connector powers and controls the addressable LEDs:
+
+| Pin No. | Wire Color | Signal | Description |
+|---------|------------|--------|-------------|
+| 1 | Black | Ground | Common ground |
+| 2 | Red | +5V | LED power supply |
+| 3 | White/Green | Data | WS2812B data signal |
+
+**Important**:
+- This is a **5V addressable RGB** header, NOT the 12V standard RGB header
+- The data pin uses the WS2812B protocol (compatible with FastLED NEOPIXEL)
+- Connect +5V to Arduino 5V output or external 5V supply
+- Connect Data to Arduino Pin 3
+
 ### Current Wiring
 
 | Component | Arduino Pin | Notes |
